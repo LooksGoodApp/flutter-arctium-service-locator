@@ -10,15 +10,22 @@ class _DisposeQueue extends Disposable {
   late final StreamSubscription _disposeSubscription;
 
   _DisposeQueue() {
-    _disposeSubscription = _disposeController.stream.listen(_disposeListener);
+    _disposeSubscription = _disposeController.stream.listen(_disposeService);
   }
 
-  void _disposeListener(dynamic service) {
+  /// Disposer method that calls [onDispose()] if service is [Disposable].
+  /// 
+  /// Used as a listener to a [_disposeService]'s Stream.
+  void _disposeService(dynamic service) {
     if (service is Disposable) {
       service.onDispose();
     }
   }
 
+  /// Sends given service to a dispose queue by adding it to the 
+  /// [_disposeController]'s sink.
+  /// 
+  /// If service is [Disposable], [Disposable.onDispose()] will be called.
   void send(dynamic service) => _disposeController.sink.add(service);
 
   @override

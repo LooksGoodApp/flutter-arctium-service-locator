@@ -2,20 +2,17 @@ part of arctium;
 
 /// Widget that locates service under the given type parameter.
 ///
-/// A [StatelessWidget] that locates service of type [ServiceType], providing
+/// A [StatelessWidget] that locates service of type [T], providing
 /// it as a parameter in the [build] method. Locating it by hand before
 /// returning from build is equivalent, but requires more code.
-abstract class LocatorWidget<ServiceType> extends StatefulWidget {
-  Widget build(BuildContext context, ServiceType service);
+abstract class LocatorWidget<T> extends StatefulWidget {
+  Widget build(BuildContext context, T service);
 
-  _LocatorWidgetState<ServiceType> createState() =>
-      _LocatorWidgetState<ServiceType>();
+  _LocatorWidgetState<T> createState() => _LocatorWidgetState<T>();
 }
 
-class _LocatorWidgetState<ServiceType>
-    extends State<LocatorWidget<ServiceType>> {
-  
-  final _instance = Arctium.instance<ServiceType>();
+class _LocatorWidgetState<T> extends State<LocatorWidget<T>> {
+  final _instance = Arctium.instance.get<T>();
 
   @override
   Widget build(BuildContext context) => widget.build(context, _instance);
