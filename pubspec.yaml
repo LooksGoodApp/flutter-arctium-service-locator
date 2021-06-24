@@ -1,4 +1,3 @@
-publish_to: "none"
 name: arctium
 description: Reliable UI-oriented service locator with great performance, Widget lifecycle bindings, queued auto disposal and useful UI integrations.
 version: 0.0.1

@@ -12,8 +12,6 @@ class MyApp extends StatelessWidget {
       );
 }
 
-// -- Service interface
-
 abstract class CounterService extends Disposable {
   ValueNotifier<int> get counterValue;
 }
@@ -26,8 +24,6 @@ class CounterServiceImplementation extends CounterService {
   void onDispose() => counterValue.dispose();
 }
 
-// -- Injector widgets
-
 class RegularInjector extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Injector<CounterService>(
@@ -35,8 +31,6 @@ class RegularInjector extends StatelessWidget {
         builder: (context, service) => CounterBody(),
       );
 }
-
-// Shared UI
 
 class CounterBody extends LocatorWidget<CounterService> {
   @override
