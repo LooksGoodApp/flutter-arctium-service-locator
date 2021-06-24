@@ -6,7 +6,7 @@ part of arctium;
 /// It is guaranteed that services are disposed in the same order that they 
 /// are added.
 class _DisposeQueue extends Disposable {
-  late final _disposeController = StreamController<dynamic>();
+  late final _disposeController = StreamController<dynamic>(sync: true);
   late final StreamSubscription _disposeSubscription;
 
   _DisposeQueue() {

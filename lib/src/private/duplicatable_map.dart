@@ -15,7 +15,7 @@ class DuplicatableMap {
 
   ValueType? get<ValueType>(String key) {
     final stack = _getStack(key);
-    if (stack != null) return stack.last as ValueType;
+    if (stack != null && stack.isNotEmpty) return stack.last as ValueType;
   }
 
   bool remove(String key) {
@@ -24,6 +24,9 @@ class DuplicatableMap {
     stack.removeLast();
     return true;
   }
+
+  List<dynamic> get values =>
+      _objectsMap.values.expand((element) => element).toList();
 
   @override
   String toString() => _objectsMap.toString();

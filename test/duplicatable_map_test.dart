@@ -39,6 +39,11 @@ void main() {
       'Get entry from stack of length 2',
       () => expect(map.get('Double'), 'Second'),
     );
+
+    test(
+      'Accessing all values',
+      () => expect(map.values, ['First', 'Second', 0]),
+    );
   });
 
   group('Removing entries', () {

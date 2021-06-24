@@ -5,7 +5,7 @@ part of arctium;
 /// Allows easy location of services, UI-oriented stack-based access for
 /// services of the same class, auto-disposal of services in centralized
 /// queue and O(1) complexity for every operation.
-class Arctium {
+class Arctium extends Disposable {
   // MARK: - Private constructor
   Arctium._();
 
@@ -41,4 +41,17 @@ class Arctium {
   }
 
   T call<T>() => get<T>();
+
+  /// Creates a new instance of service locator.
+  ///
+  /// It is advised to not use this method. Arctium supports storing different
+  /// instances of a single class, and cases when you need a new instance are
+  /// extremely rare.
+  factory Arctium.create() => Arctium._();
+
+  @override
+  void onDispose() {
+    _servicesMap.values.forEach(_disposeQueue.send);
+    _disposeQueue.onDispose();
+  }
 }
