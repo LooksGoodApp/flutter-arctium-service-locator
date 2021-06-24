@@ -23,19 +23,17 @@ class Injector<T> extends StatefulWidget {
 }
 
 class _InjectorState<T> extends State<Injector<T>> {
-  late final int _concreteKey;
-
   @override
   void initState() {
     super.initState();
-    _concreteKey = Arctium.instance._register<T>(widget.service);
+    Arctium.instance.register<T>(widget.service);
     if (widget.onInit != null) widget.onInit!(widget.service);
   }
 
   @override
   void dispose() {
     if (widget.onDispose != null) widget.onDispose!(widget.service);
-    Arctium.instance._removeConcrete<T>(_concreteKey);
+    Arctium.instance.remove<T>();
     super.dispose();
   }
 

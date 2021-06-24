@@ -1,12 +1,11 @@
 library arctium;
 
 import 'dart:async';
-import 'dart:collection';
+import 'package:arctium/src/private/duplicatable_map.dart';
 import 'package:flutter/material.dart';
 
 // Private
 part 'src/private/_dispose_queue.dart';
-part 'src/private/_duplicatable_map.dart';
 
 // Public
 part 'src/public/disposable.dart';

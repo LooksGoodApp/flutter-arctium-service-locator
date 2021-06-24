@@ -1,25 +1,21 @@
-part of arctium;
+import 'dart:collection';
 
 /// Extensions of HashMap that allows storing items at the same key with
 /// LIFO access.
 ///
 /// For every key, an individual stack is created under the hood, allowing to
 /// store any amount of values. Every operation has O(1) complexity.
-class _DuplicatableMap {
+class DuplicatableMap {
   final _objectsMap = HashMap<String, List<dynamic>>();
 
-  List<dynamic>? getStack(String key) => _objectsMap[key];
+  List<dynamic>? _getStack(String key) => _objectsMap[key];
 
-  int add<ValueType>(String key, ValueType value) {
-    final stack = _objectsMap.putIfAbsent(key, () => <ValueType>[]);
-    stack.add(value);
-    return stack.length - 1;
-  }
+  void add<ValueType>(String key, ValueType value) =>
+      _objectsMap.putIfAbsent(key, () => <ValueType>[])..add(value);
 
   ValueType? get<ValueType>(String key) {
-    final stack = getStack(key);
+    final stack = _getStack(key);
     if (stack != null) return stack.last as ValueType;
-    
   }
 
   bool remove(String key) {
@@ -29,13 +25,12 @@ class _DuplicatableMap {
     return true;
   }
 
-  bool removeConcrete(String key, int index) {
-    final stack = getStack(key);
-    if (stack == null || stack.isEmpty || stack.length <= index) return false;
-    stack.removeAt(index);
-    return true;
-  }
-
   @override
   String toString() => _objectsMap.toString();
+
+  @override
+  bool operator ==(o) => o is DuplicatableMap && _objectsMap == o._objectsMap;
+
+  @override
+  int get hashCode => _objectsMap.hashCode;
 }
