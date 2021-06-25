@@ -1,6 +1,6 @@
 name: arctium
 description: Reliable UI-oriented service locator with great performance, Widget lifecycle bindings, queued auto disposal and useful UI integrations.
-version: 0.0.1
+version: 0.0.2
 maintainer: Yakov Karpov (@purplenoodlesoop)
 
 homepage: https://github.com/LooksGoodApp/flutter-arctium-dependency-injection
