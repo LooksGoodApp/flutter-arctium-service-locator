@@ -33,6 +33,7 @@ class RegularInjector extends StatelessWidget {
 }
 
 class CounterBody extends LocatorWidget<CounterService> {
+  const CounterBody();
   @override
   Widget build(BuildContext context, CounterService service) => Scaffold(
         body: Center(
