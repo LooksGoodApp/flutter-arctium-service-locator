@@ -13,12 +13,13 @@ class Injector<T> extends StatefulWidget {
   final void Function(T service)? onDispose;
   final Widget Function(BuildContext context, T service) builder;
 
-  Injector({
+  const Injector({
     required this.service,
     this.onInit,
     this.onDispose,
     required this.builder,
-  });
+    Key? key,
+  }) : super(key: key);
 
   _InjectorState<T> createState() => _InjectorState<T>();
 }
