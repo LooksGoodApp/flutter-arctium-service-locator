@@ -1,15 +1,17 @@
-part of arctium;
+import 'dart:async';
+
+import 'package:arctium/src/public/disposable.dart';
 
 /// Provides centralized dispose queue that is used for un-registering services
 /// inside Arctium.
 /// 
 /// It is guaranteed that services are disposed in the same order that they 
 /// are added.
-class _DisposeQueue extends Disposable {
-  late final _disposeController = StreamController<dynamic>(sync: true);
+class DisposeQueue extends Disposable {
+  late final _disposeController = StreamController<dynamic>();
   late final StreamSubscription _disposeSubscription;
 
-  _DisposeQueue() {
+  DisposeQueue() {
     _disposeSubscription = _disposeController.stream.listen(_disposeService);
   }
 

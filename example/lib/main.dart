@@ -8,7 +8,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
-        home: RegularInjector(),
+        home: CounterScreen(),
       );
 }
 
@@ -24,10 +24,10 @@ class CounterServiceImplementation extends CounterService {
   void onDispose() => counterValue.dispose();
 }
 
-class RegularInjector extends StatelessWidget {
+class CounterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Injector<CounterService>(
-        service: CounterServiceImplementation(),
+        service: () => CounterServiceImplementation(),
         builder: (context, service) => CounterBody(),
       );
 }

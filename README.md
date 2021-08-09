@@ -75,6 +75,7 @@ sl.register(Service(id: 'First'));
 sl.register(Service(id: 'Second'));
 print(sl.get<Service>().id) // Prints 'Second'
 sl.remove<Service>();
+await Future.delayed(Duration.zero); // The disposal is asynchronous, so it is needed to wait for the next iteration of The Event Loop.
 print(sl.get<Service>().id) // Prints 'First'
 ```
 
@@ -112,7 +113,7 @@ abstract class CounterService extends Disposable {
 class CounterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Injector(
-        service: CounterServiceImplementation(),
+        service: () => CounterServiceImplementation(),
         builder: (context, service) => /*some UI*/,
       );
 }
@@ -124,7 +125,7 @@ Injector widget has a single type parameter, and as with a regular `.register<T>
 class CounterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Injector<CounterService>(
-        service: CounterServiceImplementation(),
+        service: () => CounterServiceImplementation(),
         builder: (context, service) => /*some UI*/,
       );
 }

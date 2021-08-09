@@ -1,4 +1,6 @@
-part of arctium;
+import 'package:arctium/src/private/duplicatable_map.dart';
+import 'package:arctium/src/private/dispose_queue.dart';
+import 'package:arctium/src/public/disposable.dart';
 
 /// Service locator.
 ///
@@ -14,7 +16,7 @@ class Arctium extends Disposable {
 
   // MARK: - Private variables
 
-  final _disposeQueue = _DisposeQueue();
+  final _disposeQueue = DisposeQueue();
   final _servicesMap = DuplicatableMap();
 
   // MARK: - Public methods
@@ -50,8 +52,9 @@ class Arctium extends Disposable {
   factory Arctium.create() => Arctium._();
 
   @override
-  void onDispose() {
+  Future<void> onDispose() async {
     _servicesMap.values.forEach(_disposeQueue.send);
+    await Future.delayed(Duration.zero);
     _disposeQueue.onDispose();
   }
 }
