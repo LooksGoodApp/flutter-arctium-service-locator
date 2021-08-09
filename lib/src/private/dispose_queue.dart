@@ -8,7 +8,7 @@ import 'package:arctium/src/public/disposable.dart';
 /// It is guaranteed that services are disposed in the same order that they 
 /// are added.
 class DisposeQueue extends Disposable {
-  late final _disposeController = StreamController<dynamic>(sync: true);
+  late final _disposeController = StreamController<dynamic>();
   late final StreamSubscription _disposeSubscription;
 
   DisposeQueue() {

@@ -52,8 +52,9 @@ class Arctium extends Disposable {
   factory Arctium.create() => Arctium._();
 
   @override
-  void onDispose() {
+  Future<void> onDispose() async {
     _servicesMap.values.forEach(_disposeQueue.send);
+    await Future.delayed(Duration.zero);
     _disposeQueue.onDispose();
   }
 }

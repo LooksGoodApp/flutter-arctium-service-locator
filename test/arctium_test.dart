@@ -55,13 +55,14 @@ void main() {
     });
   });
   group('Removing services', () {
-    test('Adding two services and removing the last one', () {
+    test('Adding two services and removing the last one', () async {
       final arctium = Arctium.create();
       final a1 = A();
       final a2 = A();
       arctium.register(a1);
       arctium.register(a2);
       arctium.remove<A>();
+      await Future.delayed(Duration.zero);
       expect(arctium<A>().id, a1.id);
     });
   });
@@ -72,6 +73,7 @@ void main() {
       final c = C(link);
       arctium.register(c);
       arctium.remove<C>();
+      await Future.delayed(Duration.zero);
       expect(link, [c.id]);
     });
 
@@ -84,6 +86,7 @@ void main() {
       arctium.register(c2);
       arctium.remove<C>();
       arctium.remove<C>();
+      await Future.delayed(Duration.zero);
       expect(link, [c2.id, c1.id]);
     });
   });
@@ -104,7 +107,7 @@ void main() {
       final link = <String>[];
       final disposable = C(link);
       arctium.register(disposable);
-      arctium.onDispose();
+      await arctium.onDispose();
       expect(link, [disposable.id]);
     });
   });
