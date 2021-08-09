@@ -1,4 +1,5 @@
-part of arctium;
+import 'package:flutter/material.dart';
+import 'package:arctium/src/public/arctium.dart';
 
 /// Widget that locates service under the given type parameter.
 ///
